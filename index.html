@@ -8,23 +8,19 @@
     :root {
       --bg: #0d1726;
       --bg-2: #162235;
-      --card: rgba(7, 15, 28, 0.88);
+      --card: rgba(7, 15, 28, 0.9);
       --text: #f3f6fb;
       --muted: #b8c2d1;
       --accent: #6e78ff;
       --accent-2: #60a5fa;
       --border: rgba(97, 119, 162, 0.22);
-      --nav: rgba(9, 19, 36, 0.92);
+      --nav: rgba(9, 19, 36, 0.94);
       --shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
     }
 
     * {
       box-sizing: border-box;
       scroll-behavior: smooth;
-    }
-
-    html {
-      scroll-snap-type: y proximity;
     }
 
     body {
@@ -62,13 +58,32 @@
       align-items: center;
       justify-content: space-between;
       gap: 24px;
+      position: relative;
     }
 
     .brand {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      letter-spacing: 0.2px;
       white-space: nowrap;
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid rgba(117, 135, 176, 0.24);
+      background: rgba(255,255,255,0.03);
+      color: #eef2fa;
+      font-size: 1.35rem;
+      cursor: pointer;
+    }
+
+    .desktop-nav,
+    .desktop-icons {
+      display: flex;
     }
 
     .nav-links {
@@ -79,14 +94,16 @@
       justify-content: center;
     }
 
-    .nav-links a {
+    .nav-links a,
+    .mobile-menu a {
       color: #d7deea;
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       transition: color 0.2s ease;
     }
 
     .nav-links a:hover,
-    .icon-link:hover {
+    .icon-link:hover,
+    .mobile-menu a:hover {
       color: var(--accent);
     }
 
@@ -98,9 +115,13 @@
     }
 
     .icon-link {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: #e6ecf8;
       transition: color 0.2s ease;
+    }
+
+    .mobile-menu {
+      display: none;
     }
 
     .panel {
@@ -108,30 +129,24 @@
       display: flex;
       align-items: center;
       padding: 120px 0 60px;
-      scroll-snap-align: start;
       border-bottom: 1px solid rgba(255,255,255,0.03);
     }
 
     .hero-panel {
       position: relative;
       overflow: hidden;
-      position: relative;
-      overflow: hidden;
       text-align: center;
       background:
-        linear-gradient(rgba(3, 7, 18, 0.72), rgba(3, 7, 18, 0.82)),
+        linear-gradient(rgba(3, 7, 18, 0.74), rgba(3, 7, 18, 0.84)),
         radial-gradient(circle at 15% 40%, rgba(255, 140, 0, 0.18), transparent 25%),
         radial-gradient(circle at 78% 35%, rgba(110, 120, 255, 0.18), transparent 28%),
-        radial-gradient(circle at 60% 68%, rgba(8, 17, 35, 0.5), transparent 22%),
         linear-gradient(120deg, #0b0f1b 0%, #09111f 38%, #11192a 100%);
     }
 
     .hero-panel::before,
     .hero-panel::after {
-      z-index: 0;
       content: "";
       position: absolute;
-      inset: auto;
       width: 42vw;
       height: 42vw;
       max-width: 620px;
@@ -139,6 +154,7 @@
       filter: blur(22px);
       opacity: 0.28;
       pointer-events: none;
+      z-index: 0;
     }
 
     .hero-panel::before {
@@ -153,18 +169,51 @@
       background: radial-gradient(circle, rgba(71, 85, 255, 0.34) 0%, rgba(71, 85, 255, 0.04) 58%, transparent 70%);
     }
 
+    .animated-wave {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 180px;
+      background: linear-gradient(180deg, rgba(96,165,250,0) 0%, rgba(96,165,250,0.06) 40%, rgba(110,120,255,0.12) 100%);
+      filter: blur(10px);
+      z-index: 1;
+      animation: waveMove 10s ease-in-out infinite alternate;
+    }
+
+    .floating-particle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(110,120,255,0.85) 45%, rgba(110,120,255,0) 75%);
+      box-shadow: 0 0 14px rgba(110, 120, 255, 0.7);
+      opacity: 0.75;
+      animation: floatParticle linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes floatParticle {
+      0% { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0; }
+      15% { opacity: 0.8; }
+      50% { transform: translate3d(30px, -80px, 0) scale(1.1); opacity: 0.9; }
+      100% { transform: translate3d(-20px, -180px, 0) scale(0.8); opacity: 0; }
+    }
+
+    @keyframes waveMove {
+      0% { transform: translateX(-2%) translateY(0px); }
+      100% { transform: translateX(2%) translateY(-14px); }
+    }
+
     .hero-content {
       position: relative;
       z-index: 2;
-      position: relative;
-      z-index: 1;
       max-width: 900px;
       margin: 0 auto;
     }
 
     .profile-image {
-      width: 185px;
-      height: 185px;
+      width: 170px;
+      height: 170px;
       margin: 0 auto 28px;
       border-radius: 50%;
       display: flex;
@@ -173,7 +222,7 @@
       background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
       border: 4px solid rgba(175, 185, 211, 0.28);
       box-shadow: 0 10px 28px rgba(0,0,0,0.32);
-      font-size: 3rem;
+      font-size: 2.8rem;
       font-weight: 700;
       color: var(--text);
     }
@@ -195,14 +244,15 @@
       letter-spacing: -1px;
     }
 
-    .hero-name .accent {
+    .hero-name .accent,
+    .section-title .accent,
+    .highlight-title {
       color: var(--accent);
-      display: inline-block;
     }
 
     .hero-role {
-      margin: 18px 0 18px;
-      font-size: clamp(1.35rem, 2.6vw, 2rem);
+      margin: 18px 0;
+      font-size: clamp(1.3rem, 2.6vw, 1.9rem);
       color: #d4ddef;
       font-weight: 500;
     }
@@ -229,105 +279,6 @@
       align-items: center;
       gap: 10px;
       color: #dbe4f2;
-    }
-
-    .section-wrap {
-      width: 100%;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      line-height: 1.1;
-      margin: 0 0 36px;
-      font-weight: 800;
-      letter-spacing: -0.8px;
-    }
-
-    .section-title .accent {
-      color: var(--accent);
-    }
-
-    .card {
-      background: linear-gradient(90deg, rgba(7, 15, 28, 0.96), rgba(6, 17, 35, 0.94));
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 34px 36px;
-      box-shadow: var(--shadow);
-    }
-
-    .section-card {
-      max-width: 1040px;
-      margin: 0 auto;
-    }
-
-    .section-card h3 {
-      margin-top: 0;
-      margin-bottom: 22px;
-      color: var(--accent-2);
-      font-size: 1.1rem;
-    }
-
-    .section-card p,
-    .section-card li {
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    .grid-2,
-    .grid-3 {
-      display: grid;
-      gap: 22px;
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    li + li {
-      margin-top: 10px;
-    }
-
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 8px 13px;
-      border-radius: 999px;
-      background: rgba(53, 72, 108, 0.42);
-      color: #dce5f3;
-      border: 1px solid rgba(111, 132, 173, 0.24);
-      font-size: 0.9rem;
-    }
-
-    .project-card h3,
-    .experience-card h3,
-    .skill-card h3,
-    .edu-card h3,
-    .contact-card h3 {
-      margin-bottom: 10px;
-      color: #f6f8fc;
-      font-size: 1.18rem;
-    }
-
-    .meta {
-      color: #c4cee0;
-      font-size: 0.95rem;
-      margin-bottom: 14px;
     }
 
     .button-group {
@@ -364,60 +315,160 @@
       color: #eef2fa;
     }
 
+    .section-wrap {
+      width: 100%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(2.3rem, 5vw, 3.9rem);
+      line-height: 1.1;
+      margin: 0 0 36px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+    }
+
+    .card {
+      background: linear-gradient(90deg, rgba(7, 15, 28, 0.96), rgba(6, 17, 35, 0.94));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 30px 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-card {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .section-card h3,
+    .skill-card h3,
+    .project-card h3,
+    .experience-card h3,
+    .case-card h3,
+    .edu-card h3,
+    .contact-card h3 {
+      margin: 0 0 12px;
+      color: #f6f8fc;
+      font-size: 1.2rem;
+    }
+
+    .section-card p,
+    .card p,
+    .card li {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .stack-list {
+      display: grid;
+      gap: 22px;
+    }
+
+    .experience-card {
+      padding: 24px 26px;
+    }
+
+    .experience-header {
+      display: grid;
+      grid-template-columns: 70px 1fr auto;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    .experience-icon {
+      width: 66px;
+      height: 66px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #57a7ff, #6e78ff);
+      color: #07101d;
+      font-size: 1.8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .experience-company {
+      color: var(--accent-2);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .experience-meta-right {
+      text-align: right;
+      color: #c6d0e2;
+      font-size: 0.95rem;
+      display: grid;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .highlight-box {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(8, 18, 34, 0.88);
+      border: 1px solid rgba(97, 119, 162, 0.18);
+    }
+
+    .highlight-title {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 10px 0 16px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(53, 72, 108, 0.42);
+      color: #dce5f3;
+      border: 1px solid rgba(111, 132, 173, 0.24);
+      font-size: 0.9rem;
+    }
+
+    .project-section-number,
+    .case-label {
+      color: var(--accent-2);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    li + li {
+      margin-top: 10px;
+    }
+
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 22px;
-    }
-
-    .floating-particle {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(110,120,255,0.85) 45%, rgba(110,120,255,0) 75%);
-      box-shadow: 0 0 14px rgba(110, 120, 255, 0.7);
-      opacity: 0.75;
-      animation: floatParticle linear infinite;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    @keyframes floatParticle {
-      0% {
-        transform: translate3d(0, 0, 0) scale(0.9);
-        opacity: 0;
-      }
-      15% {
-        opacity: 0.8;
-      }
-      50% {
-        transform: translate3d(30px, -80px, 0) scale(1.1);
-        opacity: 0.9;
-      }
-      100% {
-        transform: translate3d(-20px, -180px, 0) scale(0.8);
-        opacity: 0;
-      }
-    }
-
-    .hero-panel .animated-wave {
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 180px;
-      background: linear-gradient(180deg, rgba(96,165,250,0) 0%, rgba(96,165,250,0.06) 40%, rgba(110,120,255,0.12) 100%);
-      filter: blur(10px);
-      z-index: 1;
-      animation: waveMove 10s ease-in-out infinite alternate;
-    }
-
-    @keyframes waveMove {
-      0% {
-        transform: translateX(-2%) translateY(0px);
-      }
-      100% {
-        transform: translateX(2%) translateY(-14px);
-      }
     }
 
     footer {
@@ -428,46 +479,66 @@
     }
 
     @media (max-width: 980px) {
-      .nav-inner {
+      .nav-inner { padding: 16px 0; }
+      .desktop-nav, .desktop-icons { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .mobile-menu {
+        display: none;
+        width: 100%;
+        margin-top: 14px;
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(9, 19, 36, 0.98);
         flex-direction: column;
-        padding: 16px 0;
+        gap: 12px;
       }
-
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a {
+        padding: 8px 6px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .mobile-menu a:last-child { border-bottom: none; }
       .panel {
         min-height: auto;
         padding: 130px 0 70px;
       }
-
-      .grid-2,
-      .grid-3,
-      .contact-grid {
-        grid-template-columns: 1fr;
+      .grid-2, .grid-3, .contact-grid { grid-template-columns: 1fr; }
+      .experience-header {
+        grid-template-columns: 64px 1fr;
+      }
+      .experience-meta-right {
+        grid-column: 1 / -1;
+        text-align: left;
+        white-space: normal;
+        margin-top: -4px;
       }
     }
 
     @media (max-width: 640px) {
-      .brand {
-        font-size: 1rem;
-      }
-
-      .nav-links {
-        gap: 12px;
-      }
-
+      .brand { font-size: 1rem; }
       .profile-image {
-        width: 140px;
-        height: 140px;
+        width: 135px;
+        height: 135px;
         font-size: 2.2rem;
       }
-
-      .card {
-        padding: 24px 20px;
-      }
-
       .hero-contact-row {
         flex-direction: column;
         gap: 12px;
       }
+      .card { padding: 22px 18px; }
+      .experience-card { padding: 20px 18px; }
+      .experience-header {
+        grid-template-columns: 56px 1fr;
+        gap: 14px;
+      }
+      .experience-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        font-size: 1.5rem;
+      }
+      .nav-links { gap: 12px; }
     }
   </style>
 </head>
@@ -475,18 +546,34 @@
   <nav class="navbar">
     <div class="container nav-inner">
       <div class="brand">Dev Anand Jayakumar</div>
-      <div class="nav-links">
+      <div class="nav-links desktop-nav">
         <a href="#about">About</a>
-        <a href="#skills">Skills</a>
+        <a href="#skills">Technical Skills</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
+        <a href="#case-studies">Case Studies</a>
         <a href="#education">Education</a>
         <a href="#contact">Contact</a>
       </div>
-      <div class="nav-icons">
+      <div class="nav-icons desktop-icons">
         <a class="icon-link" href="mailto:devanand765@gmail.com" aria-label="Email">✉</a>
         <a class="icon-link" href="tel:+353899590574" aria-label="Phone">☎</a>
         <a class="icon-link" href="https://www.linkedin.com/in/dev-anand28" target="_blank" aria-label="LinkedIn">in</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+    <div class="container">
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#about">About</a>
+        <a href="#skills">Technical Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <a href="mailto:devanand765@gmail.com">Email</a>
+        <a href="tel:+353899590574">Phone</a>
+        <a href="https://www.linkedin.com/in/dev-anand28" target="_blank">LinkedIn</a>
       </div>
     </div>
   </nav>
@@ -499,8 +586,8 @@
       <h1 class="hero-name">Dev Anand<br><span class="accent">Jayakumar</span></h1>
       <div class="hero-role">Data Analyst - Campaign &amp; Financial Analyst</div>
       <p class="hero-summary">
-        Certified Data Analyst professional specialized in campaign and product analytics for the loyalty industry, supporting large customer bases with end-to-end campaign management, reporting, automation, and business-focused analytical solutions.
-      </p>
+        Experienced Data Analyst with expertise in campaign and product analytics for Australia’s largest loyalty industry, supporting large customer bases through end-to-end campaign management, financial KPI reporting, automation of manual tasks, and business-focused analytical solutions. Consistently focused on optimising existing workflows using extensive analytical methods, contributing to business improvements that saved approximately AUD 10 million. Currently working as an Operations Specialist at Covalen.
+       </p>
       <div class="hero-contact-row">
         <span>✉ devanand765@gmail.com</span>
         <span>☎ +353 899590574</span>
@@ -518,37 +605,29 @@
       <h2 class="section-title">About <span class="accent">Me</span></h2>
       <div class="card section-card">
         <h3>About Me</h3>
-        <p>
-          Based in Dublin, Ireland, I am a data analyst with over four years of experience working across campaign analytics, financial reporting, dashboard development, and process automation.
-        </p>
-        <p>
-          My background combines SQL, Excel, Power BI, Tableau, Python, Snowflake, Azure, and Power Automate to analyse large datasets, optimise reporting processes, and translate data into clear insights for business stakeholders.
-        </p>
-        <p>
-          At Tata Consultancy Services and Mu Sigma, I supported campaign performance analysis, A/B testing, KPI reporting, financial analysis, and dashboard automation. My work included reducing reporting effort, improving query performance, automating recurring tasks, and presenting decision-ready insights.
-        </p>
-        <p>
-          I recently completed my M.Sc. in Computing, Data Analytics at Dublin City University, and I am currently seeking opportunities in Ireland as a Data Analyst, Campaign Analyst, Financial Analyst, or Reporting Analyst.
-        </p>
+        <p>Based in Dublin, Ireland, Currently working as Operations Specialist in COvalen. I am a data analyst with ~5 years of experience working across campaign analytics, financial reporting, dashboard development, and process automation.</p>
+        <p>My background combines SQL, Excel, Power BI, Tableau, Python, Snowflake, Azure, and Power Automate to analyse large datasets, optimise reporting processes, and translate data into clear insights for business stakeholders.</p>
+        <p>At Covalen I work as Operations Specialist/ Analyst where my responsibilities include monitoring the operational KPI's, enhancing existing workflows to increase operational efficiency inaccordance with SLA's. At Tata Consultancy Services and Mu Sigma, I supported campaign performance analysis, A/B testing, KPI reporting, financial analysis, and dashboard automation. My work included reducing reporting effort, improving query performance, automating recurring tasks, presenting decision-ready insights, and also involving myself in activities to implement new strategies to improve the existing workflows with data-backed actions.</p>
+        <p>I completed my Master's in Computing, Data Analytics at Dublin City University, and working as Operations Specialisy @Covalen. I am currently seeking opportunities in Ireland as a Data Analyst, Campaign Analyst, Financial Analyst, Product Analyst, RIsk Analyst, Reporting Analyst, or Business Analyst.</p>
       </div>
     </div>
   </section>
 
   <section class="panel" id="skills">
     <div class="container section-wrap">
-      <h2 class="section-title">Core <span class="accent">Skills</span></h2>
+      <h2 class="section-title">Technical <span class="accent">Skills</span></h2>
       <div class="grid-3">
         <div class="card skill-card">
-          <h3>Data Analysis</h3>
-          <p>SQL, Excel, Python, data cleaning, KPI tracking, campaign and product analysis, trend analysis, and reporting support.</p>
+          <h3>Analytics & Reporting</h3>
+          <p>SQL, Excel, KPI tracking, campaign analysis, product analysis, financial analysis, trend analysis, and business reporting.</p>
         </div>
         <div class="card skill-card">
-          <h3>Visualisation & Reporting</h3>
-          <p>Power BI, Tableau, dashboard design, executive summaries, stakeholder presentations, and business storytelling.</p>
+          <h3>Visualisation & Storytelling</h3>
+          <p>Power BI, Tableau, dashboard design, performance reporting, executive summaries, and insight communication.</p>
         </div>
         <div class="card skill-card">
-          <h3>Automation & Tools</h3>
-          <p>Snowflake, Power Automate, SQL procedures, scheduled workflows, Power Query, Azure, and process improvement.</p>
+          <h3>Automation & Platforms</h3>
+          <p>Python, Snowflake, Power Automate, Power Query, Azure, SQL procedures, scheduled workflows, and process improvement.</p>
         </div>
       </div>
       <div class="card section-card" style="margin-top:22px;">
@@ -562,10 +641,10 @@
           <span class="tag">Snowflake</span>
           <span class="tag">Azure</span>
           <span class="tag">Power Automate</span>
+          <span class="tag">Power Query</span>
           <span class="tag">A/B Testing</span>
           <span class="tag">Campaign Analysis</span>
-          <span class="tag">Financial Analysis</span>
-          <span class="tag">Storytelling</span>
+          <span class="tag">Financial Reporting</span>
         </div>
       </div>
     </div>
@@ -574,10 +653,19 @@
   <section class="panel" id="experience">
     <div class="container section-wrap">
       <h2 class="section-title">Work <span class="accent">Experience</span></h2>
-      <div class="grid-2">
+      <div class="stack-list">
         <div class="card experience-card">
-          <h3>Operations Specialist</h3>
-          <div class="meta">Covalen (CPL) | Limerick, Ireland | Oct 2025 - Present</div>
+          <div class="experience-header">
+            <div class="experience-icon">C</div>
+            <div>
+              <h3>Operations Specialist</h3>
+              <div class="experience-company">Covalen (CPL)</div>
+            </div>
+            <div class="experience-meta-right">
+              <div>Oct 2025 - Present</div>
+              <div>Limerick, Ireland</div>
+            </div>
+          </div>
           <ul>
             <li>Contributed to a 10-12% reduction in repeated contacts by analysing recurring customer queries and promoting self-service solutions.</li>
             <li>Analysed operational data and call trends using advanced Excel features to support data-driven decision-making.</li>
@@ -585,34 +673,53 @@
             <li>Monitored KPIs such as AHT, AWT, and service levels to improve operational visibility and identify workflow inefficiencies.</li>
           </ul>
         </div>
+
         <div class="card experience-card">
-          <h3>Senior Data Analyst</h3>
-          <div class="meta">Mu Sigma | Bengaluru, India | Aug 2022 - Sept 2023</div>
+          <div class="experience-header">
+            <div class="experience-icon">M</div>
+            <div>
+              <h3>Senior Data Analyst</h3>
+              <div class="experience-company">Mu Sigma</div>
+            </div>
+            <div class="experience-meta-right">
+              <div>Aug 2022 - Sept 2023</div>
+              <div>Bengaluru, India</div>
+            </div>
+          </div>
           <ul>
             <li>Reduced query runtime by 30% by developing and optimising SQL queries in Snowflake using clustering keys, materialized views, and partitioning strategies.</li>
             <li>Created Power BI dashboards to visualise KPIs and present insights to senior stakeholders for data-driven decision-making.</li>
             <li>Utilised Snowflake to perform complex SQL queries and aggregate data from multiple sources to support real-time analytics and reporting.</li>
             <li>Improved reporting efficiency by 25% through business valuation, financial analysis, and Power Query-based transformation.</li>
           </ul>
+          <div class="highlight-box">
+            <div class="highlight-title">Key Achievement</div>
+            <p>Improved analytical performance and reporting efficiency by combining faster SQL processing with clearer business dashboards for stakeholder decision-making.</p>
+          </div>
         </div>
+
         <div class="card experience-card">
-          <h3>Data Analyst</h3>
-          <div class="meta">Tata Consultancy Services | Chennai, India | May 2019 - July 2022</div>
+          <div class="experience-header">
+            <div class="experience-icon">T</div>
+            <div>
+              <h3>Data Analyst</h3>
+              <div class="experience-company">Tata Consultancy Services</div>
+            </div>
+            <div class="experience-meta-right">
+              <div>May 2019 - July 2022</div>
+              <div>Chennai, India</div>
+            </div>
+          </div>
           <ul>
             <li>Developed Power BI dashboards for campaign metrics, contributing to a 75% reduction in manhours for major retail offers.</li>
             <li>Enhanced Excel reports for KPI calculations such as sales uplift, sales-to-cost ratio, and ROI, reducing manual calculation effort.</li>
             <li>Conducted A/B testing to optimise targeting conditions, contributing to a 10% increase in customer engagement.</li>
             <li>Automated repetitive tasks using Power Automate and SQL scheduled tasks, improving operational efficiency by 25% and reducing manual effort by 15%.</li>
           </ul>
-        </div>
-        <div class="card experience-card">
-          <h3>Strengths</h3>
-          <ul>
-            <li>Business-focused data storytelling and stakeholder communication</li>
-            <li>Strong reporting, dashboarding, and KPI analysis capability</li>
-            <li>Hands-on experience in campaign analytics and process automation</li>
-            <li>Ability to convert raw data into clear, decision-ready insights</li>
-          </ul>
+          <div class="highlight-box">
+            <div class="highlight-title">Key Achievement</div>
+            <p>Delivered measurable campaign reporting improvements by reducing manual effort, increasing customer engagement, and automating repeat analytical workflows.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -621,58 +728,73 @@
   <section class="panel" id="projects">
     <div class="container section-wrap">
       <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
-      <div class="grid-2">
+      <div class="stack-list">
         <div class="card project-card">
+          <div class="project-section-number">Project 1</div>
           <h3>Campaign Automation Using SQL</h3>
-          <div class="meta">SQL | Automation</div>
-          <p>Automated recurring campaign targeting and reminder workflows using stored procedures and scheduled SQL tasks.</p>
-          <ul>
-            <li>Reduced manual effort by 15%</li>
-            <li>Improved consistency in recurring campaign execution</li>
-            <li>Created a scalable approach for campaign operations</li>
-          </ul>
-          <div class="button-group">
-            <a class="btn btn-secondary" href="https://github.com/deva55" target="_blank">GitHub</a>
+          <div class="tag-row">
+            <span class="tag">SQL</span>
+            <span class="tag">Stored Procedures</span>
+            <span class="tag">Task Scheduling</span>
+            <span class="tag">Automation</span>
           </div>
+          <p><strong>Why this project started:</strong> Recurring campaign targeting and reminder activities involved repeated manual effort, higher turnaround time, and avoidable dependency on repetitive operational steps.</p>
+          <p><strong>What was achieved:</strong> Built an automated process using stored procedures and scheduled tasks to streamline recurring campaign operations, reduce manual effort by 15%, and improve consistency in execution.</p>
         </div>
+
         <div class="card project-card">
+          <div class="project-section-number">Project 2</div>
           <h3>Power BI KPI Dashboard</h3>
-          <div class="meta">Power BI | Reporting</div>
-          <p>Built an interactive dashboard to monitor campaign, sales, and operational KPIs for quicker stakeholder reporting.</p>
-          <ul>
-            <li>Improved KPI visibility and reporting efficiency</li>
-            <li>Supported better business decision-making</li>
-            <li>Designed for clear executive-level storytelling</li>
-          </ul>
-          <div class="button-group">
-            <a class="btn btn-secondary" href="https://github.com/deva55" target="_blank">GitHub</a>
+          <div class="tag-row">
+            <span class="tag">Power BI</span>
+            <span class="tag">Excel</span>
+            <span class="tag">Dashboarding</span>
+            <span class="tag">Reporting</span>
           </div>
+          <p><strong>Why this project started:</strong> Stakeholders needed faster visibility into campaign, sales, and operational KPIs without waiting for manually prepared reports.</p>
+          <p><strong>What was achieved:</strong> Created an interactive KPI dashboard that improved visibility, reduced reporting delays, and supported faster data-driven decision-making.</p>
         </div>
+
         <div class="card project-card">
-          <h3>A/B Testing Analysis</h3>
-          <div class="meta">Python / Excel | Campaign Analysis</div>
-          <p>Evaluated campaign variants to compare customer response and identify the more effective targeting approach.</p>
-          <ul>
-            <li>Measured campaign performance and uplift</li>
-            <li>Supported evidence-based campaign decisions</li>
-            <li>Improved targeting effectiveness</li>
-          </ul>
-          <div class="button-group">
-            <a class="btn btn-secondary" href="https://github.com/deva55" target="_blank">GitHub</a>
+          <div class="project-section-number">Project 3</div>
+          <h3>A/B Testing Analysis for Campaign Optimisation</h3>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">Excel</span>
+            <span class="tag">A/B Testing</span>
+            <span class="tag">Campaign Analysis</span>
           </div>
+          <p><strong>Why this project started:</strong> Campaign teams needed a more evidence-based way to identify which targeting and communication strategies were performing better.</p>
+          <p><strong>What was achieved:</strong> Evaluated campaign variants, measured uplift, and supported improved targeting decisions that contributed to a 10% increase in customer engagement.</p>
         </div>
+
         <div class="card project-card">
-          <h3>Financial & Reporting Analysis</h3>
-          <div class="meta">Excel / Power Query | Financial Analysis</div>
-          <p>Performed business valuation, financial analysis, and reporting improvements to support executive summaries and performance reviews.</p>
-          <ul>
-            <li>Improved reporting efficiency by 25%</li>
-            <li>Streamlined transformation and review workflows</li>
-            <li>Supported structured business reporting</li>
-          </ul>
-          <div class="button-group">
-            <a class="btn btn-secondary" href="https://github.com/deva55" target="_blank">GitHub</a>
+          <div class="project-section-number">Project 4</div>
+          <h3>Financial & Reporting Analysis Improvement</h3>
+          <div class="tag-row">
+            <span class="tag">Excel</span>
+            <span class="tag">Power Query</span>
+            <span class="tag">Financial Analysis</span>
+            <span class="tag">Reporting</span>
           </div>
+          <p><strong>Why this project started:</strong> Financial reporting and business valuation work required a more structured and efficient process to reduce turnaround time and improve reliability.</p>
+          <p><strong>What was achieved:</strong> Improved reporting efficiency by 25% by streamlining data transformation, reducing manual work, and producing more structured outputs for business reviews.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="case-studies">
+    <div class="container section-wrap">
+      <h2 class="section-title">Case <span class="accent">Studies</span></h2>
+      <div class="stack-list">
+        <div class="card case-card">
+          <div class="case-label">Case Study 1</div>
+          <h3>Tenant and Landlord Rating Platform for Fairer Housing Access</h3>
+          <p><strong>Problem:</strong> In Ireland, rental listings can create difficulties for both genuine tenants and responsible landlords. Tenants often face high rents, delayed repairs, weak property maintenance, and situations where landlords may not be registered with the RTB. At the same time, landlords and agents also need a better way to identify suitable tenants based on fit, reliability, and mutual expectations.</p>
+          <p><strong>Idea:</strong> Build a rating and matching platform connected to rental-style listing workflows, where property posts are shown only to applicants who match the landlord’s criteria and where tenant and landlord ratings improve transparency on both sides.</p>
+          <p><strong>Goal:</strong> Create a fairer and more data-driven rental ecosystem that reduces exploitation, improves trust, and helps both tenants and landlords make better decisions before entering an agreement.</p>
+          <p><strong>Status:</strong> Initial case study idea. Approach, tools, data model, and implementation plan will be added later.</p>
         </div>
       </div>
     </div>
@@ -683,10 +805,8 @@
       <h2 class="section-title">Education <span class="accent">Background</span></h2>
       <div class="card edu-card section-card">
         <h3>M.Sc. in Computing, Data Analytics</h3>
-        <div class="meta">Dublin City University | Dublin, Ireland | Graduated Nov 2024</div>
-        <p>
-          Completed postgraduate study focused on data analytics, structured data processing, analytics-driven problem solving, and practical application of modern analytical techniques.
-        </p>
+        <p>Dublin City University | Dublin, Ireland | Graduated Nov 2024</p>
+        <p>Completed postgraduate study focused on data analytics, structured data processing, analytics-driven problem solving, and practical application of modern analytical techniques.</p>
       </div>
     </div>
   </section>
@@ -717,6 +837,7 @@
   <footer>
     © 2026 Dev Anand Jayakumar | Data Analyst Portfolio
   </footer>
+
   <script>
     const hero = document.querySelector('.hero-panel');
     const particleCount = 28;
@@ -731,6 +852,25 @@
       particle.style.transform = `scale(${0.6 + Math.random() * 1.4})`;
       hero.appendChild(particle);
     }
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      const isExpanded = mobileMenu.classList.contains('open');
+      menuToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      menuToggle.textContent = isExpanded ? '✕' : '☰';
+    });
+
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = '☰';
+      });
+    });
   </script>
 </body>
 </html>
