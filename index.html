@@ -212,19 +212,19 @@
     }
 
     .profile-image {
-      width: 170px;
-      height: 170px;
-      margin: 0 auto 28px;
+      width: 185px;
+      height: 185px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-      border: 4px solid rgba(175, 185, 211, 0.28);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.32);
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--text);
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 28px;
+      border: 4px solid rgba(110, 120, 255, 0.6);
+      box-shadow: 0 0 25px rgba(110, 120, 255, 0.4);
+      transition: 0.3s ease;
+    }
+
+    .profile-image:hover {
+      transform: scale(1.05);
     }
 
     .eyebrow {
@@ -520,7 +520,6 @@
       .profile-image {
         width: 135px;
         height: 135px;
-        font-size: 2.2rem;
       }
       .hero-contact-row {
         flex-direction: column;
@@ -581,13 +580,13 @@
   <section class="panel hero-panel" id="home">
     <div class="animated-wave"></div>
     <div class="container hero-content">
-      <div class="profile-image">DA</div>
+      <img src="ProfilePicture.png" alt="Dev Anand Jayakumar" class="profile-image" />
       <p class="eyebrow">Data Analytics Portfolio</p>
       <h1 class="hero-name">Dev Anand<br><span class="accent">Jayakumar</span></h1>
       <div class="hero-role">Data Analyst - Campaign &amp; Financial Analyst</div>
       <p class="hero-summary">
-        Experienced Data Analyst with expertise in campaign and product analytics for Australia’s largest loyalty industry, supporting large customer bases through end-to-end campaign management, financial KPI reporting, automation of manual tasks, and business-focused analytical solutions. Consistently focused on optimising existing workflows using extensive analytical methods, contributing to business improvements that saved approximately AUD 10 million. Currently working as an Operations Specialist at Covalen.
-       </p>
+        Certified Data Analyst professional specialized in campaign and product analytics for the loyalty industry, supporting large customer bases with end-to-end campaign management, reporting, automation, and business-focused analytical solutions.
+      </p>
       <div class="hero-contact-row">
         <span>✉ devanand765@gmail.com</span>
         <span>☎ +353 899590574</span>
@@ -605,10 +604,10 @@
       <h2 class="section-title">About <span class="accent">Me</span></h2>
       <div class="card section-card">
         <h3>About Me</h3>
-        <p>Based in Dublin, Ireland, Currently working as Operations Specialist in COvalen. I am a data analyst with ~5 years of experience working across campaign analytics, financial reporting, dashboard development, and process automation.</p>
+        <p>Based in Dublin, Ireland, I am a data analyst with over four years of experience working across campaign analytics, financial reporting, dashboard development, and process automation.</p>
         <p>My background combines SQL, Excel, Power BI, Tableau, Python, Snowflake, Azure, and Power Automate to analyse large datasets, optimise reporting processes, and translate data into clear insights for business stakeholders.</p>
-        <p>At Covalen I work as Operations Specialist/ Analyst where my responsibilities include monitoring the operational KPI's, enhancing existing workflows to increase operational efficiency inaccordance with SLA's. At Tata Consultancy Services and Mu Sigma, I supported campaign performance analysis, A/B testing, KPI reporting, financial analysis, and dashboard automation. My work included reducing reporting effort, improving query performance, automating recurring tasks, presenting decision-ready insights, and also involving myself in activities to implement new strategies to improve the existing workflows with data-backed actions.</p>
-        <p>I completed my Master's in Computing, Data Analytics at Dublin City University, and working as Operations Specialisy @Covalen. I am currently seeking opportunities in Ireland as a Data Analyst, Campaign Analyst, Financial Analyst, Product Analyst, RIsk Analyst, Reporting Analyst, or Business Analyst.</p>
+        <p>At Tata Consultancy Services and Mu Sigma, I supported campaign performance analysis, A/B testing, KPI reporting, financial analysis, and dashboard automation. My work included reducing reporting effort, improving query performance, automating recurring tasks, and presenting decision-ready insights.</p>
+        <p>I recently completed my M.Sc. in Computing, Data Analytics at Dublin City University, and I am currently seeking opportunities in Ireland as a Data Analyst, Campaign Analyst, Financial Analyst, or Reporting Analyst.</p>
       </div>
     </div>
   </section>
