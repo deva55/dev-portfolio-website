@@ -1,1665 +1,875 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dev Anand Jayakumar | Data Analyst Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #ffffff;
-    --ink: #1a2340;
-    --ink-soft: #4a5578;
-    --accent: #2f6bff;
-    --accent-soft: #eaf1ff;
-    --warm: #ff8a4c;
-    --mint: #37c9a3;
-    --pink: #ff6b9a;
-    --lemon: #ffd166;
-    --line: #e6ebf5;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(12px);
-    z-index: 100;
-    padding: 18px 8vw;
-    display: flex; justify-content: space-between; align-items: center;
-    border-bottom: 1px solid var(--line);
-  }
-  nav .brand { font-weight: 800; font-size: 20px; color: var(--accent); }
-  nav ul { display: flex; gap: 28px; list-style: none; }
-  nav ul a {
-    text-decoration: none; color: var(--ink-soft);
-    font-weight: 500; font-size: 14px; transition: color .2s;
-  }
-  nav ul a:hover { color: var(--accent); }
-  @media (max-width: 800px) { nav ul { display: none; } }
-
-  section {
-    padding: 120px 8vw 80px;
-    min-height: 100vh;
-    display: flex; align-items: center;
-  }
-  .section-title {
-    font-weight: 800; font-size: clamp(28px, 4vw, 44px);
-    color: var(--ink); margin-bottom: 8px;
-    letter-spacing: -0.5px;
-  }
-  .section-title span { color: var(--accent); }
-  .eyebrow {
-    color: var(--accent); font-weight: 600; font-size: 14px;
-    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px;
-  }
-
-  /* HERO */
-  #hero {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 20px;
-  align-items: center;
-  padding-top: 140px;
-}
-  #hero .name {
-  font-size: clamp(28px, 4.2vw, 52px);
-  font-weight: 600;
-  line-height: 1.02;
-  letter-spacing: -1.5px;
-  color: var(--ink);
-}
-  #hero .name .accent { color: var(--accent); }
-  #hero .subtitle {
-    font-size: 18px; color: var(--ink-soft);
-    margin: 24px 0 32px; max-width: 480px;
-  }
-  #hero .subtitle strong { color: var(--ink); font-weight: 600; }
-  .rotator {
-    display: inline-block;
-    color: var(--accent);
-    font-weight: 700;
-    min-height: 1.2em;
-  }
-
-  #rotator {
-    min-width: 190px;
-  }
-
-  #rotatorAlt {
-    min-width: 215px;
-  }
-
-  @media (max-width: 520px) {
-    #rotator {
-      min-width: 175px;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev Anand Jayakumar | Portfolio</title>
+  <style>
+    :root {
+      --bg: #0d1726;
+      --bg-2: #162235;
+      --card: rgba(7, 15, 28, 0.9);
+      --text: #f3f6fb;
+      --muted: #b8c2d1;
+      --accent: #6e78ff;
+      --accent-2: #60a5fa;
+      --border: rgba(97, 119, 162, 0.22);
+      --nav: rgba(9, 19, 36, 0.94);
+      --shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
     }
 
-    #rotatorAlt {
-      min-width: 205px;
-    }
-  }
-  .cta-group { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 13px 26px; border-radius: 40px;
-    font-weight: 600; font-size: 15px;
-    text-decoration: none; transition: transform .2s, box-shadow .2s;
-    border: 2px solid var(--accent);
-  }
-  .btn-primary { background: var(--accent); color: white; }
-  .btn-secondary { background: white; color: var(--accent); }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(47,107,255,0.25); }
-  #hero .illustration {
-  width: 100%;
-  max-width: 580px;
-  justify-self: start;
-}
-  @media (max-width: 900px) {
-    #hero { grid-template-columns: 1fr; text-align: center; }
-    .cta-group { justify-content: center; }
-  }
-
-  /* HERO ROTATOR */
-  .hero-rotator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-  .rotator-stage {
-    position: relative;
-    width: 100%;
-    max-width: 520px;
-    aspect-ratio: 1 / 1;
-  }
-  .rotator-stage .slide {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    opacity: 0;
-    transform: scale(0.96);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    pointer-events: none;
-  }
-  .rotator-stage .slide.active {
-    opacity: 1;
-    transform: scale(1);
-  }
-  .rotator-caption {
-    font-family: 'Poppins', sans-serif;
-    font-size: 15px;
-    color: var(--ink-soft);
-    font-weight: 500;
-    min-height: 24px;
-    text-align: center;
-    transition: opacity 0.4s ease;
-    max-width: 500px;
-  }
-  .rotator-dots {
-    display: flex;
-    gap: 8px;
-    margin-top: 4px;
-  }
-  .rotator-dots .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: none;
-    background: var(--line);
-    cursor: pointer;
-    padding: 0;
-    transition: background 0.3s, width 0.3s;
-  }
-  .rotator-dots .dot.active {
-    background: var(--accent);
-    width: 22px;
-    border-radius: 4px;
-  }
-  .rotator-dots .dot:hover {
-    background: var(--accent);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .rotator-stage .slide { transition: opacity 0.2s ease; transform: none; }
-    .rotator-stage .slide.active { transform: none; }
-  }
-
-  /* ABOUT */
-  #about { background: linear-gradient(180deg, #fbfcff 0%, #ffffff 100%); }
-  .about-grid { display: grid; grid-template-columns: 380px 1fr; gap: 60px; align-items: center; }
-  .about-photo {
-    width: 100%; aspect-ratio: 1; border-radius: 24px;
-    background: linear-gradient(135deg, var(--accent-soft), #fff);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 20px 60px rgba(47,107,255,0.12);
-    overflow: hidden;
-  }
-  .about-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .about-text p { color: var(--ink-soft); margin: 16px 0; max-width: 620px; }
-  .about-text a { color: var(--accent); font-weight: 600; text-decoration: none; }
-  .about-text a:hover { text-decoration: underline; }
-
-  .company-highlight {
-    color: var(--accent);
-    font-weight: 600;
-  }
-  .edu-table {
-    margin-top: 32px; border-radius: 16px; overflow: hidden;
-    border: 1px solid var(--line);
-  }
-  .edu-row {
-    display: grid;
-    grid-template-columns: 1.25fr 2fr 1.5fr;
-    align-items: center;
-    gap: 18px;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--line);
-    font-size: 14px;
-  }
-
-  .edu-row:last-child {
-    border-bottom: none;
-  }
-
-  .degree-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 11px;
-    color: var(--ink);
-    font-weight: 700;
-  }
-
-  .degree-icon {
-    position: relative;
-    width: 38px;
-    height: 38px;
-    flex: 0 0 38px;
-    border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .degree-icon svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .degree-icon.master {
-    background: var(--accent-soft);
-    color: var(--accent);
-  }
-
-  .degree-icon.bachelor {
-    background: #fff0eb;
-    color: #e9785f;
-  }
-
-  .degree-level {
-    line-height: 1.2;
-  }
-
-  .degree-level small {
-    display: block;
-    margin-top: 3px;
-    color: var(--ink-soft);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-
-  @media (max-width: 650px) {
-    .edu-row {
-      grid-template-columns: 1fr;
-      gap: 9px;
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
     }
 
-    .edu-row > span:not(.degree-label) {
-      padding-left: 49px;
-    }
-  }
-  @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
-
-  /* SKILLS */
-  .skills-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
-    margin-bottom: 54px;
-  }
-
-  .skills-header p {
-    color: var(--ink-soft);
-    max-width: 560px;
-  }
-
-  .skill-cluster {
-    margin-bottom: 54px;
-  }
-
-  .skill-cluster:last-child {
-    margin-bottom: 0;
-  }
-
-  .cluster-title {
-    font-weight: 700;
-    font-size: 22px;
-    color: var(--ink);
-    margin-bottom: 26px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .cluster-title::before {
-    content: '';
-    width: 6px;
-    height: 24px;
-    background: var(--accent);
-    border-radius: 3px;
-    flex-shrink: 0;
-  }
-
-  .skill-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    column-gap: 58px;
-    row-gap: 24px;
-  }
-
-  .skill-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    min-width: 0;
-    padding: 6px 2px;
-    color: var(--ink);
-    font-size: 16px;
-    font-weight: 500;
-    transition: transform 0.22s ease, color 0.22s ease;
-  }
-
-  .skill-item:hover {
-    color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  .skill-icon {
-    width: 42px;
-    height: 42px;
-    flex: 0 0 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .skill-icon img,
-  .skill-icon svg {
-    width: 34px;
-    height: 34px;
-    object-fit: contain;
-  }
-
-  .skill-name {
-    line-height: 1.3;
-  }
-
-  /* Staggered dropping effect */
-  .skills-animate .skill-item {
-    opacity: 0;
-    transform: translateY(-28px);
-  }
-
-  .skills-animate .skill-item.skill-visible {
-    animation: skillDropIn 0.58s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-delay: var(--skill-delay, 0ms);
-  }
-
-  @keyframes skillDropIn {
-    0% {
-      opacity: 0;
-      transform: translateY(-28px);
-    }
-
-    72% {
-      opacity: 1;
-      transform: translateY(4px);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @media (max-width: 1000px) {
-    .skill-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 44px;
-    }
-  }
-
-  @media (max-width: 900px) {
-    .skills-header {
-      grid-template-columns: 1fr;
-      margin-bottom: 44px;
-    }
-  }
-
-  @media (max-width: 620px) {
-    .skill-grid {
-      grid-template-columns: 1fr;
-      row-gap: 20px;
-    }
-
-    .skill-item {
-      font-size: 15px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .skills-animate .skill-item,
-    .skills-animate .skill-item.skill-visible {
-      opacity: 1;
-      transform: none;
-      animation: none;
-    }
-  }
-
-  /* EXPERIENCE */
-  #experience {
-    background:
-      radial-gradient(circle at top right, rgba(47, 107, 255, 0.08), transparent 34%),
-      #f8faff;
-  }
-
-  .experience-intro {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: end;
-    margin-bottom: 52px;
-  }
-
-  .experience-intro p {
-    color: var(--ink-soft);
-    max-width: 560px;
-    justify-self: end;
-  }
-
-  .experience-timeline {
-    position: relative;
-    width: 100%;
-    max-width: 1060px;
-    margin: 0 auto;
-  }
-
-  .experience-timeline::before {
-    content: '';
-    position: absolute;
-    top: 12px;
-    bottom: 12px;
-    left: 174px;
-    width: 2px;
-    background: linear-gradient(
-      180deg,
-      rgba(47, 107, 255, 0.18),
-      rgba(47, 107, 255, 0.65),
-      rgba(47, 107, 255, 0.18)
-    );
-  }
-
-  .experience-entry {
-    position: relative;
-    display: grid;
-    grid-template-columns: 145px 36px minmax(0, 1fr);
-    gap: 12px;
-    align-items: start;
-    margin-bottom: 34px;
-  }
-
-  .experience-entry:last-child {
-    margin-bottom: 0;
-  }
-
-  .experience-date {
-    text-align: right;
-    padding-top: 19px;
-  }
-
-  .experience-date strong {
-    display: block;
-    color: var(--ink);
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.35;
-  }
-
-  .experience-date span {
-    display: block;
-    color: var(--ink-soft);
-    font-size: 12.5px;
-    margin-top: 6px;
-  }
-
-  .experience-marker {
-    position: relative;
-    z-index: 2;
-    width: 18px;
-    height: 18px;
-    margin: 22px auto 0;
-    border-radius: 50%;
-    background: var(--entry-color, var(--accent));
-    border: 5px solid #f8faff;
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--entry-color, var(--accent)) 28%, transparent);
-  }
-
-  .experience-card {
-    position: relative;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.96);
-    border: 1px solid var(--line);
-    border-radius: 22px;
-    padding: 28px 30px 26px;
-    box-shadow: 0 18px 55px rgba(30, 55, 110, 0.07);
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease,
-      border-color 0.25s ease;
-  }
-
-  .experience-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 5px;
-    height: 100%;
-    background: var(--entry-color, var(--accent));
-  }
-
-  .experience-card:hover {
-    transform: translateY(-4px);
-    border-color: color-mix(in srgb, var(--entry-color, var(--accent)) 35%, var(--line));
-    box-shadow: 0 24px 65px rgba(30, 55, 110, 0.12);
-  }
-
-  .experience-heading {
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
-    align-items: flex-start;
-    margin-bottom: 18px;
-  }
-
-  .experience-role {
-    color: var(--ink);
-    font-size: 21px;
-    font-weight: 700;
-    line-height: 1.25;
-  }
-
-  .experience-company {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--entry-color, var(--accent));
-    font-size: 14px;
-    font-weight: 700;
-    margin-top: 5px;
-  }
-
-  .experience-company::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: currentColor;
-  }
-
-  .experience-type {
-    flex-shrink: 0;
-    padding: 6px 11px;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--entry-color, var(--accent)) 10%, white);
-    color: var(--entry-color, var(--accent));
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.4px;
-    text-transform: uppercase;
-  }
-
-  .experience-points {
-    list-style: none;
-    display: grid;
-    gap: 12px;
-    color: var(--ink-soft);
-    font-size: 14.5px;
-  }
-
-  .experience-points li {
-    position: relative;
-    padding-left: 22px;
-  }
-
-  .experience-points li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--entry-color, var(--accent));
-    font-weight: 700;
-  }
-
-  .experience-points strong {
-    color: var(--ink);
-    font-weight: 700;
-  }
-
-  .experience-impact {
-    display: flex;
-    gap: 11px;
-    align-items: flex-start;
-    margin-top: 20px;
-    padding: 14px 16px;
-    border-radius: 14px;
-    background: color-mix(in srgb, var(--entry-color, var(--accent)) 8%, white);
-    color: var(--ink-soft);
-    font-size: 13.5px;
-  }
-
-  .experience-impact-label {
-    flex-shrink: 0;
-    color: var(--entry-color, var(--accent));
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 11px;
-    padding-top: 2px;
-  }
-
-  @media (max-width: 900px) {
-    .experience-intro {
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-bottom: 42px;
-    }
-
-    .experience-intro p {
-      justify-self: start;
-    }
-
-    .experience-timeline::before {
-      left: 9px;
-    }
-
-    .experience-entry {
-      grid-template-columns: 20px minmax(0, 1fr);
-      gap: 16px;
-    }
-
-    .experience-date {
-      grid-column: 2;
-      grid-row: 1;
-      text-align: left;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      padding-top: 0;
-      margin-bottom: -3px;
-    }
-
-    .experience-date strong,
-    .experience-date span {
-      display: inline;
+    body {
       margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      color: var(--text);
+      line-height: 1.65;
     }
 
-    .experience-marker {
-      grid-column: 1;
-      grid-row: 1 / span 2;
-      width: 16px;
-      height: 16px;
-      margin-top: 5px;
-      border-width: 4px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .experience-card {
-      grid-column: 2;
-      grid-row: 2;
-    }
-  }
-
-  @media (max-width: 620px) {
-    .experience-card {
-      padding: 24px 20px 22px;
-      border-radius: 18px;
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
     }
 
-    .experience-heading {
-      flex-direction: column;
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: var(--nav);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      position: relative;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid rgba(117, 135, 176, 0.24);
+      background: rgba(255,255,255,0.03);
+      color: #eef2fa;
+      font-size: 1.35rem;
+      cursor: pointer;
+    }
+
+    .desktop-nav,
+    .desktop-icons {
+      display: flex;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a,
+    .mobile-menu a {
+      color: #d7deea;
+      font-size: 0.96rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .icon-link:hover,
+    .mobile-menu a:hover {
+      color: var(--accent);
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      white-space: nowrap;
+    }
+
+    .icon-link {
+      font-size: 1.15rem;
+      color: #e6ecf8;
+      transition: color 0.2s ease;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .panel {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      background:
+        linear-gradient(rgba(3, 7, 18, 0.74), rgba(3, 7, 18, 0.84)),
+        radial-gradient(circle at 15% 40%, rgba(255, 140, 0, 0.18), transparent 25%),
+        radial-gradient(circle at 78% 35%, rgba(110, 120, 255, 0.18), transparent 28%),
+        linear-gradient(120deg, #0b0f1b 0%, #09111f 38%, #11192a 100%);
+    }
+
+    .hero-panel::before,
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      width: 42vw;
+      height: 42vw;
+      max-width: 620px;
+      max-height: 620px;
+      filter: blur(22px);
+      opacity: 0.28;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-panel::before {
+      left: -8%;
+      top: 18%;
+      background: radial-gradient(circle, rgba(255, 128, 0, 0.38) 0%, rgba(255, 128, 0, 0.04) 58%, transparent 70%);
+    }
+
+    .hero-panel::after {
+      right: -8%;
+      top: 14%;
+      background: radial-gradient(circle, rgba(71, 85, 255, 0.34) 0%, rgba(71, 85, 255, 0.04) 58%, transparent 70%);
+    }
+
+    .animated-wave {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 180px;
+      background: linear-gradient(180deg, rgba(96,165,250,0) 0%, rgba(96,165,250,0.06) 40%, rgba(110,120,255,0.12) 100%);
+      filter: blur(10px);
+      z-index: 1;
+      animation: waveMove 10s ease-in-out infinite alternate;
+    }
+
+    .floating-particle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(110,120,255,0.85) 45%, rgba(110,120,255,0) 75%);
+      box-shadow: 0 0 14px rgba(110, 120, 255, 0.7);
+      opacity: 0.75;
+      animation: floatParticle linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes floatParticle {
+      0% { transform: translate3d(0, 0, 0) scale(0.9); opacity: 0; }
+      15% { opacity: 0.8; }
+      50% { transform: translate3d(30px, -80px, 0) scale(1.1); opacity: 0.9; }
+      100% { transform: translate3d(-20px, -180px, 0) scale(0.8); opacity: 0; }
+    }
+
+    @keyframes waveMove {
+      0% { transform: translateX(-2%) translateY(0px); }
+      100% { transform: translateX(2%) translateY(-14px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .profile-image {
+      width: 185px;
+      height: 185px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 28px;
+      border: 4px solid rgba(110, 120, 255, 0.6);
+      box-shadow: 0 0 25px rgba(110, 120, 255, 0.4);
+      transition: 0.3s ease;
+    }
+
+    .profile-image:hover {
+      transform: scale(1.05);
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: #d5dbeb;
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 7vw, 5.2rem);
+      line-height: 1.05;
+      margin: 0;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .hero-name .accent,
+    .section-title .accent,
+    .highlight-title {
+      color: var(--accent);
+    }
+
+    .hero-role {
+      margin: 18px 0;
+      font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+      color: #d4ddef;
+      font-weight: 500;
+    }
+
+    .hero-summary {
+      max-width: 860px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .hero-contact-row {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 28px;
+      justify-content: center;
+      color: #e9eef8;
+      font-size: 1rem;
+    }
+
+    .hero-contact-row span {
+      display: inline-flex;
+      align-items: center;
       gap: 10px;
+      color: #dbe4f2;
     }
 
-    .experience-type {
-      align-self: flex-start;
+    .button-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
     }
 
-    .experience-impact {
-      flex-direction: column;
-      gap: 5px;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid rgba(117, 135, 176, 0.24);
+      transition: 0.2s ease;
     }
-  }
 
-  /* PROJECTS */
-  .proj-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px; margin-top: 40px;
-  }
-  .proj-card {
-    background: white; border-radius: 20px;
-    padding: 28px; border: 1px solid var(--line);
-    transition: transform .3s, box-shadow .3s;
-    display: flex; flex-direction: column;
-  }
-  .proj-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-  .proj-number {
-    font-family: 'Fira Code', monospace; font-size: 12px;
-    color: var(--warm); font-weight: 600; margin-bottom: 8px;
-  }
-  .proj-illustration { width: 100%; height: 140px; margin-bottom: 16px; }
-  .proj-title { font-weight: 700; font-size: 18px; margin-bottom: 12px; color: var(--ink); }
-  .proj-desc { color: var(--ink-soft); font-size: 14px; margin-bottom: 12px; flex: 1; }
-  .proj-desc strong { color: var(--ink); }
-  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-  .proj-tag {
-    background: var(--accent-soft); color: var(--accent);
-    padding: 4px 10px; border-radius: 12px;
-    font-size: 11px; font-weight: 600;
-  }
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(117, 135, 176, 0.5);
+    }
 
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #5ca6ff);
+      color: #08101d;
+      border: none;
+    }
 
-  .proj-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-  }
+    .btn-secondary {
+      background: rgba(255,255,255,0.02);
+      color: #eef2fa;
+    }
 
-  .proj-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: var(--accent);
-    color: white;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
+    .section-wrap {
+      width: 100%;
+    }
 
-  .proj-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(47,107,255,0.22);
-  }
+    .section-title {
+      text-align: center;
+      font-size: clamp(2.3rem, 5vw, 3.9rem);
+      line-height: 1.1;
+      margin: 0 0 36px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+    }
 
-  /* CASE STUDY */
-  #case { background: #fbfcff; }
-  .case-card {
-    background: white; border-radius: 24px; padding: 40px;
-    border: 1px solid var(--line); max-width: 900px;
-    margin: 40px auto 0;
-    box-shadow: 0 20px 60px rgba(47,107,255,0.06);
-  }
-  .case-card h3 { font-size: 24px; margin-bottom: 20px; }
-  .case-card .case-row { margin: 18px 0; }
-  .case-card .case-row strong { color: var(--accent); display: block; margin-bottom: 4px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
-  .case-card .case-row p { color: var(--ink-soft); }
+    .card {
+      background: linear-gradient(90deg, rgba(7, 15, 28, 0.96), rgba(6, 17, 35, 0.94));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 30px 32px;
+      box-shadow: var(--shadow);
+    }
 
-  /* CONTACT */
-  #contact { background: linear-gradient(135deg, var(--ink) 0%, #2a3560 100%); color: white; }
-  #contact .section-title { color: white; }
-  #contact .section-title span { color: var(--warm); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-  .contact-info p { margin: 12px 0; color: rgba(255,255,255,0.8); }
-  .contact-info a { color: white; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); }
-  .contact-info a:hover { border-color: var(--warm); color: var(--warm); }
-  .contact-socials { display: flex; gap: 12px; margin-top: 24px; }
-  .contact-info .social-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 22px;
-    border-radius: 40px;
-    background: white;
-    color: var(--ink);
-    border-bottom: none;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    transition: transform .2s, background .2s, color .2s;
-  }
+    .section-card {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
 
-  .contact-info .social-btn:hover {
-    transform: translateY(-2px);
-    background: var(--warm);
-    color: white;
-    border-bottom: none;
-  }
-  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+    .section-card h3,
+    .skill-card h3,
+    .project-card h3,
+    .experience-card h3,
+    .case-card h3,
+    .edu-card h3,
+    .contact-card h3 {
+      margin: 0 0 12px;
+      color: #f6f8fc;
+      font-size: 1.2rem;
+    }
 
-  footer {
-    text-align: center; padding: 24px; background: var(--ink);
-    color: rgba(255,255,255,0.5); font-size: 13px;
-  }
-  /* SECTION TRANSITIONS */
-.reveal-section {
-  opacity: 0;
-  transform: translateY(40px);
-  transition:
-    opacity 0.75s ease,
-    transform 0.75s ease;
-}
+    .section-card p,
+    .card p,
+    .card li {
+      color: var(--muted);
+      font-size: 1rem;
+    }
 
-.reveal-section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 22px;
+    }
 
-/* Hero entrance animation */
-#hero > div:first-child {
-  animation: heroTextEnter 0.8s ease both;
-}
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-#hero .illustration {
-  animation: heroImageEnter 0.9s ease 0.15s both;
-}
+    .stack-list {
+      display: grid;
+      gap: 22px;
+    }
 
-@keyframes heroTextEnter {
-  from {
-    opacity: 0;
-    transform: translateX(-35px);
-  }
+    .experience-card {
+      padding: 24px 26px;
+    }
 
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+    .experience-header {
+      display: grid;
+      grid-template-columns: 70px 1fr auto;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
 
-@keyframes heroImageEnter {
-  from {
-    opacity: 0;
-    transform: translateX(35px);
-  }
+    .experience-icon {
+      width: 66px;
+      height: 66px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #57a7ff, #6e78ff);
+      color: #07101d;
+      font-size: 1.8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
 
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+    .experience-company {
+      color: var(--accent-2);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
 
-/* Disable movement for users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+    .experience-meta-right {
+      text-align: right;
+      color: #c6d0e2;
+      font-size: 0.95rem;
+      display: grid;
+      gap: 8px;
+      white-space: nowrap;
+    }
 
-  .reveal-section,
-  .reveal-section.is-visible,
-  #hero > div:first-child,
-  #hero .illustration {
-    opacity: 1;
-    transform: none;
-    animation: none;
-    transition: none;
-  }
-}
-</style>
+    .highlight-box {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(8, 18, 34, 0.88);
+      border: 1px solid rgba(97, 119, 162, 0.18);
+    }
+
+    .highlight-title {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 10px 0 16px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(53, 72, 108, 0.42);
+      color: #dce5f3;
+      border: 1px solid rgba(111, 132, 173, 0.24);
+      font-size: 0.9rem;
+    }
+
+    .project-section-number,
+    .case-label {
+      color: var(--accent-2);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    li + li {
+      margin-top: 10px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 16px 36px;
+      color: #b4c0d3;
+      background: #0b1321;
+    }
+
+    @media (max-width: 980px) {
+      .nav-inner { padding: 16px 0; }
+      .desktop-nav, .desktop-icons { display: none; }
+      .menu-toggle { display: inline-flex; }
+      .mobile-menu {
+        display: none;
+        width: 100%;
+        margin-top: 14px;
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(9, 19, 36, 0.98);
+        flex-direction: column;
+        gap: 12px;
+      }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a {
+        padding: 8px 6px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .mobile-menu a:last-child { border-bottom: none; }
+      .panel {
+        min-height: auto;
+        padding: 130px 0 70px;
+      }
+      .grid-2, .grid-3, .contact-grid { grid-template-columns: 1fr; }
+      .experience-header {
+        grid-template-columns: 64px 1fr;
+      }
+      .experience-meta-right {
+        grid-column: 1 / -1;
+        text-align: left;
+        white-space: normal;
+        margin-top: -4px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .brand { font-size: 1rem; }
+      .profile-image {
+        width: 135px;
+        height: 135px;
+      }
+      .hero-contact-row {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .card { padding: 22px 18px; }
+      .experience-card { padding: 20px 18px; }
+      .experience-header {
+        grid-template-columns: 56px 1fr;
+        gap: 14px;
+      }
+      .experience-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        font-size: 1.5rem;
+      }
+      .nav-links { gap: 12px; }
+    }
+  </style>
 </head>
 <body>
-
-<nav>
-  <div class="brand">Dev Anand.</div>
-  <ul>
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div>
-    <h6 class="name">DEV ANAND<br/>JAYAKUMAR<span class="accent">.</span></h6>
-    <p class="subtitle">
-  I am a <span class="rotator" id="rotator" aria-live="polite">Data Analyst</span><br/>
-  applying <span class="rotator rotator-alt" id="rotatorAlt" aria-live="polite">Artificial Intelligence</span><br/>
-  to automate analytical workflows and improve efficiency.<br/><br/>
-  Driving <strong>loyalty management, personalised targeting campaigns, automation, KPI and financial reporting, and operational improvements</strong> with SQL, Python, Excel, Power BI, and Power Automate.
-</p>
-    <div class="cta-group">
-      <a href="#projects" class="btn btn-primary">See my work →</a>
-      <a href="#" class="btn btn-secondary">Download CV</a>
-    </div>
-  </div>
-
-  <div class="illustration hero-rotator">
-    <div class="rotator-stage">
-      <img src="./assets/illustrations/Ecommerce_campaign.gif" alt="Personalized campaign targeting" class="slide active" data-caption="Increased Sales Uplift, participation rate through personalized targeting criteria.">
-      <img src="./assets/illustrations/report.svg" alt="Financial reports and KPIs" class="slide" data-caption="Reports and dashboards with Sales and Financial KPIs.">
-      <img src="./assets/illustrations/timeline.svg" alt="Career timeline" class="slide" data-caption="Operations Specialist at Covalen, Ireland | 4+ years working in Tata Consultancy Services and Mu Sigma, India.">
-      <img src="./assets/illustrations/ai.gif" alt="Adapting to AI and ML" class="slide" data-caption="Adapting best AI practices and building ML models.">
-    </div>
-    <div class="rotator-caption" id="rotatorCaption">Lifted participation rate through personalized targeting criteria.</div>
-    <div class="rotator-dots">
-      <button class="dot active" data-index="0" aria-label="Show campaign targeting"></button>
-      <button class="dot" data-index="1" aria-label="Show reports"></button>
-      <button class="dot" data-index="2" aria-label="Show timeline"></button>
-      <button class="dot" data-index="3" aria-label="Show AI"></button>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div style="width:100%">
-    <div class="eyebrow"><h2>About Me</h2></div>
-
-    <div class="about-grid" style="margin-top: 40px;">
-      <div class="about-photo">
-        <img src="./profile_picture.jpg" alt="Dev Anand Jayakumar" />
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">Dev Anand Jayakumar</div>
+      <div class="nav-links desktop-nav">
+        <a href="#about">About</a>
+        <a href="#skills">Technical Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
       </div>
-
-      <div class="about-text">
-        <p>
-  Hey! I'm <strong style="color:var(--ink)">Dev</strong>, a data enthusiast and
-  analytics professional based in Dublin with over four years of experience
-  transforming customer, campaign, operational, and financial data into insights
-  that stakeholders can use.
-</p>
-
-<p>
-  I've worked across campaign analytics,
-  financial and KPI reporting, dashboard development, data validation, query
-  optimisation, and process automation at
-  <span class="company-highlight">Mu Sigma</span> and
-  <span class="company-highlight">Tata Consultancy Services</span>.
-  My experience includes leading a five-member team delivering
-  20+ personalised campaigns per month
-  for a $2.5 million AUD loyalty account,
-  contributing to a 17% increase in member
-  acquisition and a
-  24% reduction in lapsing members.
-</p>
-  
-<p>
-  I completed my M.Sc. in Computing in Data Analytics at Dublin City University
-  and currently work as Operations Specialist at
-  <span class="company-highlight">Covalen</span>, supporting AIB's card-payment
-  operations. I am now seeking Data Analyst, Campaign Analyst, Business
-  Analyst or Data Engineering opportunities in Ireland.
-</p>
-
-        <div class="edu-table">
-          <div class="edu-row">
-            <span class="degree-label">
-              <span class="degree-icon master" aria-hidden="true">
-                <svg viewBox="0 0 48 48" fill="none">
-                  <path d="M5 18L24 9l19 9-19 9L5 18Z" fill="currentColor"/>
-                  <path d="M13 23v9c0 4 5 7 11 7s11-3 11-7v-9l-11 5-11-5Z" fill="currentColor" opacity=".72"/>
-                  <path d="M41 19v10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                  <circle cx="41" cy="32" r="3" fill="currentColor"/>
-                  <path d="M32 8l1.4 3.1L37 12.5l-3.6 1.4L32 17l-1.4-3.1-3.6-1.4 3.6-1.4L32 8Z" fill="#ffd166"/>
-                </svg>
-              </span>
-              <span class="degree-level">
-                M.Sc.
-                <small>Master's</small>
-              </span>
-            </span>
-            <span>Computing in Data Analytics</span>
-            <span>DCU, Dublin</span>
-          </div>
-
-          <div class="edu-row">
-            <span class="degree-label">
-              <span class="degree-icon bachelor" aria-hidden="true">
-                <svg viewBox="0 0 48 48" fill="none">
-                  <path d="M5 18L24 9l19 9-19 9L5 18Z" fill="currentColor"/>
-                  <path d="M13 23v9c0 4 5 7 11 7s11-3 11-7v-9l-11 5-11-5Z" fill="currentColor" opacity=".72"/>
-                  <path d="M41 19v10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                  <circle cx="41" cy="32" r="3" fill="currentColor"/>
-                </svg>
-              </span>
-              <span class="degree-level">
-                B.E.
-                <small>Bachelor's</small>
-              </span>
-            </span>
-            <span>Computer Science</span>
-            <span>SEC, India</span>
-          </div>
-        </div>
+      <div class="nav-icons desktop-icons">
+        <a class="icon-link" href="mailto:devanand765@gmail.com" aria-label="Email">✉</a>
+        <a class="icon-link" href="tel:+353899590574" aria-label="Phone">☎</a>
+        <a class="icon-link" href="https://www.linkedin.com/in/dev-anand28" target="_blank" aria-label="LinkedIn">in</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+    <div class="container">
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#about">About</a>
+        <a href="#skills">Technical Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <a href="mailto:devanand765@gmail.com">Email</a>
+        <a href="tel:+353899590574">Phone</a>
+        <a href="https://www.linkedin.com/in/dev-anand28" target="_blank">LinkedIn</a>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- SKILLS -->
-<section id="skills">
-  <div style="width:100%">
-    <div class="eyebrow"><h2>My Skills</h2></div>
-
-    <div class="skills-header">
-      <div>
-        <h2 class="section-title">What I <span>bring</span> to the table</h2>
-      </div>
-      <p>Four years of hands-on analytics, from SQL and Python for data preparation and automation to Power BI for reporting, experimentation, and machine learning model development.</p>
-    </div>
-
-    <div class="skill-cluster">
-      <div class="cluster-title">Data &amp; Programming</div>
-      <div class="skill-grid">
-        <div class="skill-item">
-          <div class="skill-icon" aria-label="SQL">
-            <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
-              <ellipse cx="24" cy="10" rx="16" ry="6" fill="#2f6bff"/>
-              <path d="M8 10v10c0 3.3 7.2 6 16 6s16-2.7 16-6V10" fill="#7ea1ff"/>
-              <path d="M8 20v10c0 3.3 7.2 6 16 6s16-2.7 16-6V20" fill="#4f7dff"/>
-              <path d="M8 30v8c0 3.3 7.2 6 16 6s16-2.7 16-6v-8" fill="#2f6bff"/>
-              <ellipse cx="24" cy="20" rx="16" ry="6" fill="none" stroke="#ffffff" stroke-opacity=".7"/>
-              <ellipse cx="24" cy="30" rx="16" ry="6" fill="none" stroke="#ffffff" stroke-opacity=".55"/>
-            </svg>
-          </div>
-          <span class="skill-name">SQL</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/logos:python.svg" alt="Python"></div>
-          <span class="skill-name">Python</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/simple-icons:pandas.svg?color=%23150458" alt="Pandas"></div>
-          <span class="skill-name">Pandas</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/logos:numpy.svg" alt="NumPy"></div>
-          <span class="skill-name">NumPy</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="skill-cluster">
-      <div class="cluster-title">BI, Reporting &amp; Visualisation</div>
-      <div class="skill-grid">
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/logos:microsoft-power-bi.svg" alt="Power BI"></div>
-          <span class="skill-name">Power BI</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/logos:tableau-icon.svg" alt="Tableau"></div>
-          <span class="skill-name">Tableau</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/vscode-icons:file-type-excel.svg" alt="Excel"></div>
-          <span class="skill-name">Excel</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon" aria-label="Power Query">
-            <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
-              <rect x="5" y="7" width="38" height="34" rx="8" fill="#2d8c5b"/>
-              <path d="M13 14h22l-8 10v8l-6 3V24l-8-10z" fill="#ffffff"/>
-              <circle cx="34" cy="34" r="6" fill="#b9f6d2"/>
-              <path d="M31.5 34h5M34 31.5v5" stroke="#2d8c5b" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <span class="skill-name">Power Query</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/mdi:view-dashboard-outline.svg?color=%232f6bff" alt="Dashboarding"></div>
-          <span class="skill-name">Dashboarding</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/mdi:file-chart-outline.svg?color=%2337c9a3" alt="Executive Reporting"></div>
-          <span class="skill-name">Executive Reporting</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="skill-cluster">
-      <div class="cluster-title">Analytics &amp; Machine Learning</div>
-      <div class="skill-grid">
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/mdi:chart-line.svg?color=%232f6bff" alt="KPI Tracking"></div>
-          <span class="skill-name">KPI Tracking</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/mdi:bullhorn-outline.svg?color=%23ff6b9a" alt="Campaign Analysis"></div>
-          <span class="skill-name">Campaign Analysis</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/mdi:finance.svg?color=%2337c9a3" alt="Financial Analysis"></div>
-          <span class="skill-name">Financial Analysis</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/mdi:trending-up.svg?color=%23ff8a4c" alt="Trend Analysis"></div>
-          <span class="skill-name">Trend Analysis</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/mdi:ab-testing.svg?color=%238a63d2" alt="A/B Testing"></div>
-          <span class="skill-name">A/B Testing</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/carbon:machine-learning-model.svg?color=%232f6bff" alt="Machine Learning Model Building"></div>
-          <span class="skill-name">Machine Learning Model Building</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="skill-cluster">
-      <div class="cluster-title">Platforms, Cloud &amp; Automation</div>
-      <div class="skill-grid">
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/logos:snowflake-icon.svg" alt="Snowflake"></div>
-          <span class="skill-name">Snowflake</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/logos:microsoft-azure.svg" alt="Azure"></div>
-          <span class="skill-name">Azure</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon" aria-label="Power Automate">
-            <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
-              <path d="M7 12h19l8 8-8 8H7l8-8-8-8z" fill="#2f6bff"/>
-              <path d="M22 20h19l-8 8 8 8H22l-8-8 8-8z" fill="#79a2ff"/>
-              <path d="M14 20h14" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-              <path d="M25 28h9" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <span class="skill-name">Power Automate</span>
-        </div>
-
-        <div class="skill-item">
-          <div class="skill-icon"><img src="https://api.iconify.design/logos:github-icon.svg" alt="GitHub"></div>
-          <span class="skill-name">GitHub</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div style="width:100%">
-    <div class="experience-intro">
-      <div>
-        <div class="eyebrow"><h2>Experience</h2></div>
-        <h2 class="section-title">Where I've <span>worked</span></h2>
-      </div>
-
-      <p>
-        Experience across banking operations, loyalty and campaign analytics,
-        data quality, reporting, and large-scale customer data analysis.
+  <section class="panel hero-panel" id="home">
+    <div class="animated-wave"></div>
+    <div class="container hero-content">
+      <img src="profile_picture.jpg" alt="Dev Anand Jayakumar" class="profile-image" />
+      <p class="eyebrow">Data Analytics Portfolio</p>
+      <h1 class="hero-name">Dev Anand<br><span class="accent">Jayakumar</span></h1>
+      <div class="hero-role">Data Analyst - Campaign &amp; Financial Analyst</div>
+      <p class="hero-summary">
+        Certified Data Analyst professional specialized in campaign and product analytics for the loyalty industry, supporting large customer bases with end-to-end campaign management, reporting, automation, and business-focused analytical solutions.
       </p>
+      <div class="hero-contact-row">
+        <span>✉ devanand765@gmail.com</span>
+        <span>☎ +353 899590574</span>
+        <span>📍 Dublin, Ireland</span>
+      </div>
+      <div class="button-group" style="justify-content:center; margin-top:26px;">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/dev-anand28" target="_blank">LinkedIn</a>
+        <a class="btn btn-secondary" href="https://github.com/deva55" target="_blank">GitHub</a>
+      </div>
     </div>
+  </section>
 
-    <div class="experience-timeline">
+  <section class="panel" id="about">
+    <div class="container section-wrap">
+      <h2 class="section-title">About <span class="accent">Me</span></h2>
+      <div class="card section-card">
+        <h3>About Me</h3>
+        <p>Based in Dublin, Ireland, I am a data analyst with over four years of experience working across campaign analytics, financial reporting, dashboard development, and process automation.</p>
+        <p>My background combines SQL, Excel, Power BI, Tableau, Python, Snowflake, Azure, and Power Automate to analyse large datasets, optimise reporting processes, and translate data into clear insights for business stakeholders.</p>
+        <p>At Tata Consultancy Services and Mu Sigma, I supported campaign performance analysis, A/B testing, KPI reporting, financial analysis, and dashboard automation. My work included reducing reporting effort, improving query performance, automating recurring tasks, and presenting decision-ready insights.</p>
+        <p>I recently completed my M.Sc. in Computing, Data Analytics at Dublin City University, and I am currently seeking opportunities in Ireland as a Data Analyst, Campaign Analyst, Financial Analyst, or Reporting Analyst.</p>
+      </div>
+    </div>
+  </section>
 
-      <article class="experience-entry" style="--entry-color:#37c9a3">
-        <div class="experience-date">
-          <strong>Oct 2025 – Present</strong>
-          <span>Limerick, Ireland</span>
+  <section class="panel" id="skills">
+    <div class="container section-wrap">
+      <h2 class="section-title">Technical <span class="accent">Skills</span></h2>
+      <div class="grid-3">
+        <div class="card skill-card">
+          <h3>Analytics & Reporting</h3>
+          <p>SQL, Excel, KPI tracking, campaign analysis, product analysis, financial analysis, trend analysis, and business reporting.</p>
         </div>
+        <div class="card skill-card">
+          <h3>Visualisation & Storytelling</h3>
+          <p>Power BI, Tableau, dashboard design, performance reporting, executive summaries, and insight communication.</p>
+        </div>
+        <div class="card skill-card">
+          <h3>Automation & Platforms</h3>
+          <p>Python, Snowflake, Power Automate, Power Query, Azure, SQL procedures, scheduled workflows, and process improvement.</p>
+        </div>
+      </div>
+      <div class="card section-card" style="margin-top:22px;">
+        <h3>Tools & Technologies</h3>
+        <div class="tag-row">
+          <span class="tag">SQL</span>
+          <span class="tag">Excel</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Tableau</span>
+          <span class="tag">Python</span>
+          <span class="tag">Snowflake</span>
+          <span class="tag">Azure</span>
+          <span class="tag">Power Automate</span>
+          <span class="tag">Power Query</span>
+          <span class="tag">A/B Testing</span>
+          <span class="tag">Campaign Analysis</span>
+          <span class="tag">Financial Reporting</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="experience-marker" aria-hidden="true"></div>
-
-        <div class="experience-card">
-          <div class="experience-heading">
+  <section class="panel" id="experience">
+    <div class="container section-wrap">
+      <h2 class="section-title">Work <span class="accent">Experience</span></h2>
+      <div class="stack-list">
+        <div class="card experience-card">
+          <div class="experience-header">
+            <div class="experience-icon">C</div>
             <div>
-              <h3 class="experience-role">Customer Operations Specialist</h3>
-              <div class="experience-company">Covalen (CPL) · AIB Operations</div>
+              <h3>Operations Specialist</h3>
+              <div class="experience-company">Covalen (CPL)</div>
             </div>
-            <span class="experience-type">Banking Operations</span>
-          </div>
-
-          <ul class="experience-points">
-            <li>
-              Analyse and manage <strong>30–40+ daily card-payment cases</strong>
-              using TSYS, Visa Access, and Arcot, validating customer data and
-              investigating transaction discrepancies while following GDPR and
-              operational controls.
-            </li>
-            <li>
-              Collaborate with <strong>3–4 internal teams</strong> to investigate
-              payment issues, support refunds, and ensure accurate processing,
-              timely resolution, and SLA adherence.
-            </li>
-          </ul>
-
-          <div class="experience-impact">
-            <span class="experience-impact-label">Impact</span>
-            <span>
-              Applied transaction analysis and operational controls to support
-              accurate and timely banking operations.
-            </span>
-          </div>
-        </div>
-      </article>
-
-      <article class="experience-entry" style="--entry-color:#e9785f">
-        <div class="experience-date">
-          <strong>Aug 2022 – Sept 2023</strong>
-          <span>Bengaluru, India</span>
-        </div>
-
-        <div class="experience-marker" aria-hidden="true"></div>
-
-        <div class="experience-card">
-          <div class="experience-heading">
-            <div>
-              <h3 class="experience-role">Senior Data Analyst</h3>
-              <div class="experience-company">Mu Sigma · Flybuys Loyalty Programme</div>
+            <div class="experience-meta-right">
+              <div>Oct 2025 - Present</div>
+              <div>Limerick, Ireland</div>
             </div>
-            <span class="experience-type">Campaign Analytics</span>
           </div>
-
-          <ul class="experience-points">
-            <li>
-              Led a <strong>five-member team</strong> delivering
-              <strong>20+ personalised campaigns per month</strong> for Flybuys,
-              supporting a <strong>$2.5 million AUD</strong> loyalty-programme account.
-            </li>
-            <li>
-              Analysed customer purchase behaviour to develop a global
-              inter-purchase-interval trigger, contributing to a
-              <strong>17% increase in member acquisition</strong>, a
-              <strong>24% reduction in lapsing members</strong>, and a
-              <strong>six-day reduction</strong> in average purchase interval.
-            </li>
-            <li>
-              Supported the design and implementation of a pre- and post-campaign
-              transformation framework, delivering an
-              <strong>80% efficiency improvement</strong> through standardised
-              targeting criteria, campaign automation, and near-real-time reporting.
-            </li>
-            <li>
-              Built reusable <strong>Power BI data models, calculated columns,
-              and DAX measures</strong> to report campaign volume, sales performance,
-              audience reach, and partner-level KPIs, reducing dependency on manual reporting.
-            </li>
+          <ul>
+            <li>Contributed to a 10-12% reduction in repeated contacts by analysing recurring customer queries and promoting self-service solutions.</li>
+            <li>Analysed operational data and call trends using advanced Excel features to support data-driven decision-making.</li>
+            <li>Developed structured validation checklists to achieve near 100% verification accuracy and strengthen GDPR compliance controls.</li>
+            <li>Monitored KPIs such as AHT, AWT, and service levels to improve operational visibility and identify workflow inefficiencies.</li>
           </ul>
+        </div>
 
-          <div class="experience-impact">
-            <span class="experience-impact-label">Impact</span>
-            <span>
-              Converted loyalty and customer-behaviour data into personalised
-              campaigns, automated reporting, and measurable improvements in member engagement.
-            </span>
+        <div class="card experience-card">
+          <div class="experience-header">
+            <div class="experience-icon">M</div>
+            <div>
+              <h3>Senior Data Analyst</h3>
+              <div class="experience-company">Mu Sigma</div>
+            </div>
+            <div class="experience-meta-right">
+              <div>Aug 2022 - Sept 2023</div>
+              <div>Bengaluru, India</div>
+            </div>
+          </div>
+          <ul>
+            <li>Reduced query runtime by 30% by developing and optimising SQL queries in Snowflake using clustering keys, materialized views, and partitioning strategies.</li>
+            <li>Created Power BI dashboards to visualise KPIs and present insights to senior stakeholders for data-driven decision-making.</li>
+            <li>Utilised Snowflake to perform complex SQL queries and aggregate data from multiple sources to support real-time analytics and reporting.</li>
+            <li>Improved reporting efficiency by 25% through business valuation, financial analysis, and Power Query-based transformation.</li>
+          </ul>
+          <div class="highlight-box">
+            <div class="highlight-title">Key Achievement</div>
+            <p>Improved analytical performance and reporting efficiency by combining faster SQL processing with clearer business dashboards for stakeholder decision-making.</p>
           </div>
         </div>
-      </article>
 
-      <article class="experience-entry" style="--entry-color:#e9785f">
-        <div class="experience-date">
-          <strong>May 2019 – July 2022</strong>
-          <span>Chennai, India</span>
-        </div>
-
-        <div class="experience-marker" aria-hidden="true"></div>
-
-        <div class="experience-card">
-          <div class="experience-heading">
+        <div class="card experience-card">
+          <div class="experience-header">
+            <div class="experience-icon">T</div>
             <div>
-              <h3 class="experience-role">Data Analyst</h3>
+              <h3>Data Analyst</h3>
               <div class="experience-company">Tata Consultancy Services</div>
             </div>
-            <span class="experience-type">Data Analytics</span>
+            <div class="experience-meta-right">
+              <div>May 2019 - July 2022</div>
+              <div>Chennai, India</div>
+            </div>
           </div>
-
-          <ul class="experience-points">
-            <li>
-              Used <strong>SQL and Python, including Pandas and NumPy</strong>, to
-              clean, transform, validate, and analyse customer and transaction data,
-              ensuring reliable datasets for reporting and business analysis.
-            </li>
-            <li>
-              Analysed complex datasets covering <strong>9 million+ users</strong>
-              to identify trends, patterns, and data gaps supporting business decision-making.
-            </li>
-            <li>
-              Reduced Snowflake query runtime by <strong>30%</strong> by developing
-              and optimising SQL queries using selective clustering keys,
-              materialised views, and improved micro-partition pruning.
-            </li>
+          <ul>
+            <li>Developed Power BI dashboards for campaign metrics, contributing to a 75% reduction in manhours for major retail offers.</li>
+            <li>Enhanced Excel reports for KPI calculations such as sales uplift, sales-to-cost ratio, and ROI, reducing manual calculation effort.</li>
+            <li>Conducted A/B testing to optimise targeting conditions, contributing to a 10% increase in customer engagement.</li>
+            <li>Automated repetitive tasks using Power Automate and SQL scheduled tasks, improving operational efficiency by 25% and reducing manual effort by 15%.</li>
           </ul>
-
-          <div class="experience-impact">
-            <span class="experience-impact-label">Impact</span>
-            <span>
-              Improved data quality, analytical reliability, and query performance
-              for large-scale reporting and analysis.
-            </span>
+          <div class="highlight-box">
+            <div class="highlight-title">Key Achievement</div>
+            <p>Delivered measurable campaign reporting improvements by reducing manual effort, increasing customer engagement, and automating repeat analytical workflows.</p>
           </div>
         </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div style="width:100%">
-    <div class="eyebrow"><h2>Projects</h2></div>
-    <h2 class="section-title">Things I've <span>built</span></h2>
-
-    <div class="proj-grid">
-
-      <div class="proj-card">
-        <div class="proj-number">/ 01</div>
-
-        <svg class="proj-illustration" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Natural language processing illustration">
-          <rect x="18" y="22" width="164" height="78" rx="12" fill="#eaf1ff"/>
-          <rect x="34" y="38" width="72" height="8" rx="4" fill="#2f6bff"/>
-          <rect x="34" y="54" width="112" height="6" rx="3" fill="#b9c9ee"/>
-          <rect x="34" y="67" width="92" height="6" rx="3" fill="#b9c9ee"/>
-          <circle cx="151" cy="72" r="18" fill="#37c9a3"/>
-          <path d="M143 72l6 6 11-13" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-
-        <div class="proj-title">Aspect-Based Sentiment Analysis</div>
-
-        <div class="proj-desc">
-          Compared traditional machine learning, lexicon-based methods, BERT, RoBERTa, and GPT-based approaches to identify review aspects and classify sentiment.
-          <br/><br/>
-          <strong>Value:</strong> Demonstrates Python, NLP, transformer models, model comparison, preprocessing, and evaluation.
-        </div>
-
-        <div class="proj-tags">
-          <span class="proj-tag">Python</span>
-          <span class="proj-tag">NLP</span>
-          <span class="proj-tag">BERT</span>
-          <span class="proj-tag">RoBERTa</span>
-          <span class="proj-tag">Machine Learning</span>
-        </div>
-
-        <div class="proj-actions">
-          <a
-            class="proj-link"
-            href="https://github.com/deva55/ABSA---Transformer-Models-Comparison"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View on GitHub →
-          </a>
-        </div>
-      </div>
-
-      <div class="proj-card">
-        <div class="proj-number">/ 02</div>
-
-        <svg class="proj-illustration" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Business intelligence dashboard illustration">
-          <rect x="18" y="18" width="164" height="86" rx="12" fill="#fff7e6"/>
-          <rect x="31" y="31" width="138" height="12" rx="4" fill="#ffd166"/>
-          <rect x="34" y="74" width="18" height="20" rx="2" fill="#2f6bff"/>
-          <rect x="60" y="61" width="18" height="33" rx="2" fill="#37c9a3"/>
-          <rect x="86" y="49" width="18" height="45" rx="2" fill="#ff8a4c"/>
-          <rect x="112" y="67" width="18" height="27" rx="2" fill="#ff6b9a"/>
-          <path d="M35 56l26-8 24 4 29-13 30 7 22-11" fill="none" stroke="#2f6bff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-
-        <div class="proj-title">BlinkIT Grocery Sales Dashboard</div>
-
-        <div class="proj-desc">
-          Built a Power BI dashboard to analyse sales performance across products, outlet types, locations, and operational KPIs using structured retail data.
-          <br/><br/>
-          <strong>Value:</strong> Demonstrates Power BI, SQL, Excel, data modelling, KPI analysis, and business storytelling.
-        </div>
-
-        <div class="proj-tags">
-          <span class="proj-tag">Power BI</span>
-          <span class="proj-tag">SQL</span>
-          <span class="proj-tag">Excel</span>
-          <span class="proj-tag">Dashboarding</span>
-          <span class="proj-tag">KPI Analysis</span>
-        </div>
-
-        <div class="proj-actions">
-          <a
-            class="proj-link"
-            href="https://github.com/deva55/BlinkIT-Grocery-Dashboard"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View on GitHub →
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CASE STUDY -->
-<section id="case">
-  <div style="width:100%">
-    <div class="eyebrow"><h2>Case Study</h2></div>
-    <h2 class="section-title">Beyond the day job: <span>ideas I'm exploring</span></h2>
-    <div class="case-card">
-      <h3>Tenant & Landlord Rating Platform for Fairer Housing</h3>
-      <div class="case-row"><strong>Problem</strong><p>Ireland's rental market creates friction on both sides — tenants face opaque conditions, and landlords struggle to find reliable matches.</p></div>
-      <div class="case-row"><strong>Idea</strong><p>A rating and matching platform where property listings are shown only to applicants matching the landlord's criteria, and ratings surface trust on both sides.</p></div>
-      <div class="case-row"><strong>Goal</strong><p>A fairer, more data-driven rental ecosystem — reducing exploitation and helping both sides make better calls before signing.</p></div>
-      <div class="case-row"><strong>Status</strong><p>Working through the data model and implementation plan. Updates coming soon.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div style="width:100%">
-    <div class="eyebrow" style="color:var(--warm)">Contact</div>
-    <h2 class="section-title">Let's <span>talk</span></h2>
-    <div class="contact-grid" style="margin-top: 40px;">
-      <div class="contact-info">
-        <p>Looking for an analyst who ships? I'm currently open to <strong style="color:var(--warm)">Data / Campaign / Financial / Business Analyst or Data Engineering </strong> roles in Ireland.</p>
-        <p>📧 <a href="mailto:devanand765@gmail.com">devanand765@gmail.com</a></p>
-        <p>📞 <a href="tel:+353899590574">+353 89 959 0574</a></p>
-        <p>📍 Dublin, Ireland</p>
-        <div class="contact-socials">
-          <a class="social-btn" href="https://linkedin.com/in/dev-anand28">LinkedIn</a>
-          <a class="social-btn" href="https://github.com/deva55">GitHub</a>
-        </div>
-      </div>
-      <div>
-        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="200" cy="150" r="120" fill="rgba(255,255,255,0.05)"/>
-          <rect x="120" y="110" width="160" height="100" rx="12" fill="white"/>
-          <path d="M 120 110 L 200 165 L 280 110" stroke="#2f6bff" stroke-width="3" fill="none"/>
-          <circle cx="290" cy="100" r="18" fill="#ff8a4c"/>
-          <text x="285" y="106" font-family="Poppins" font-size="16" font-weight="bold" fill="white">1</text>
-        </svg>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>Made with lots of ☕ · © 2026 Dev Anand Jayakumar</footer>
+  <section class="panel" id="projects">
+    <div class="container section-wrap">
+      <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
+      <div class="stack-list">
+        <div class="card project-card">
+          <div class="project-section-number">Project 1</div>
+          <h3>Campaign Automation Using SQL</h3>
+          <div class="tag-row">
+            <span class="tag">SQL</span>
+            <span class="tag">Stored Procedures</span>
+            <span class="tag">Task Scheduling</span>
+            <span class="tag">Automation</span>
+          </div>
+          <p><strong>Why this project started:</strong> Recurring campaign targeting and reminder activities involved repeated manual effort, higher turnaround time, and avoidable dependency on repetitive operational steps.</p>
+          <p><strong>What was achieved:</strong> Built an automated process using stored procedures and scheduled tasks to streamline recurring campaign operations, reduce manual effort by 15%, and improve consistency in execution.</p>
+        </div>
 
-<script>
-  // Reusable typewriter rotator
-  function createTypewriter(elementId, words, options = {}) {
-    const element = document.getElementById(elementId);
-    if (!element || !words.length) return;
+        <div class="card project-card">
+          <div class="project-section-number">Project 2</div>
+          <h3>Power BI KPI Dashboard</h3>
+          <div class="tag-row">
+            <span class="tag">Power BI</span>
+            <span class="tag">Excel</span>
+            <span class="tag">Dashboarding</span>
+            <span class="tag">Reporting</span>
+          </div>
+          <p><strong>Why this project started:</strong> Stakeholders needed faster visibility into campaign, sales, and operational KPIs without waiting for manually prepared reports.</p>
+          <p><strong>What was achieved:</strong> Created an interactive KPI dashboard that improved visibility, reduced reporting delays, and supported faster data-driven decision-making.</p>
+        </div>
 
-    const typingSpeed = options.typingSpeed || 90;
-    const deletingSpeed = options.deletingSpeed || 40;
-    const pauseDuration = options.pauseDuration || 1400;
-    const startDelay = options.startDelay || 0;
+        <div class="card project-card">
+          <div class="project-section-number">Project 3</div>
+          <h3>A/B Testing Analysis for Campaign Optimisation</h3>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">Excel</span>
+            <span class="tag">A/B Testing</span>
+            <span class="tag">Campaign Analysis</span>
+          </div>
+          <p><strong>Why this project started:</strong> Campaign teams needed a more evidence-based way to identify which targeting and communication strategies were performing better.</p>
+          <p><strong>What was achieved:</strong> Evaluated campaign variants, measured uplift, and supported improved targeting decisions that contributed to a 10% increase in customer engagement.</p>
+        </div>
 
-    let wordIndex = 0;
-    let characterIndex = 0;
-    let deleting = false;
+        <div class="card project-card">
+          <div class="project-section-number">Project 4</div>
+          <h3>Financial & Reporting Analysis Improvement</h3>
+          <div class="tag-row">
+            <span class="tag">Excel</span>
+            <span class="tag">Power Query</span>
+            <span class="tag">Financial Analysis</span>
+            <span class="tag">Reporting</span>
+          </div>
+          <p><strong>Why this project started:</strong> Financial reporting and business valuation work required a more structured and efficient process to reduce turnaround time and improve reliability.</p>
+          <p><strong>What was achieved:</strong> Improved reporting efficiency by 25% by streamlining data transformation, reducing manual work, and producing more structured outputs for business reviews.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    function tick() {
-      const currentWord = words[wordIndex];
+  <section class="panel" id="case-studies">
+    <div class="container section-wrap">
+      <h2 class="section-title">Case <span class="accent">Studies</span></h2>
+      <div class="stack-list">
+        <div class="card case-card">
+          <div class="case-label">Case Study 1</div>
+          <h3>Tenant and Landlord Rating Platform for Fairer Housing Access</h3>
+          <p><strong>Problem:</strong> In Ireland, rental listings can create difficulties for both genuine tenants and responsible landlords. Tenants often face high rents, delayed repairs, weak property maintenance, and situations where landlords may not be registered with the RTB. At the same time, landlords and agents also need a better way to identify suitable tenants based on fit, reliability, and mutual expectations.</p>
+          <p><strong>Idea:</strong> Build a rating and matching platform connected to rental-style listing workflows, where property posts are shown only to applicants who match the landlord’s criteria and where tenant and landlord ratings improve transparency on both sides.</p>
+          <p><strong>Goal:</strong> Create a fairer and more data-driven rental ecosystem that reduces exploitation, improves trust, and helps both tenants and landlords make better decisions before entering an agreement.</p>
+          <p><strong>Status:</strong> Initial case study idea. Approach, tools, data model, and implementation plan will be added later.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      if (!deleting) {
-        characterIndex += 1;
-        element.textContent = currentWord.slice(0, characterIndex);
+  <section class="panel" id="education">
+    <div class="container section-wrap">
+      <h2 class="section-title">Education <span class="accent">Background</span></h2>
+      <div class="card edu-card section-card">
+        <h3>M.Sc. in Computing, Data Analytics</h3>
+        <p>Dublin City University | Dublin, Ireland | Graduated Nov 2024</p>
+        <p>Completed postgraduate study focused on data analytics, structured data processing, analytics-driven problem solving, and practical application of modern analytical techniques.</p>
+      </div>
+    </div>
+  </section>
 
-        if (characterIndex === currentWord.length) {
-          deleting = true;
-          setTimeout(tick, pauseDuration);
-          return;
-        }
-      } else {
-        characterIndex -= 1;
-        element.textContent = currentWord.slice(0, characterIndex);
+  <section class="panel" id="contact">
+    <div class="container section-wrap">
+      <h2 class="section-title">Get In <span class="accent">Touch</span></h2>
+      <div class="contact-grid">
+        <div class="card contact-card">
+          <h3>Contact Details</h3>
+          <p><strong>Email:</strong> <a href="mailto:devanand765@gmail.com">devanand765@gmail.com</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+353899590574">+353 899590574</a></p>
+          <p><strong>Location:</strong> Dublin, Ireland</p>
+        </div>
+        <div class="card contact-card">
+          <h3>Profiles</h3>
+          <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/dev-anand28" target="_blank">linkedin.com/in/dev-anand28</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/deva55" target="_blank">github.com/deva55</a></p>
+          <div class="button-group">
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/dev-anand28" target="_blank">Open LinkedIn</a>
+            <a class="btn btn-secondary" href="https://github.com/deva55" target="_blank">Open GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        if (characterIndex === 0) {
-          deleting = false;
-          wordIndex = (wordIndex + 1) % words.length;
-        }
-      }
+  <footer>
+    © 2026 Dev Anand Jayakumar | Data Analyst Portfolio
+  </footer>
 
-      setTimeout(tick, deleting ? deletingSpeed : typingSpeed);
+  <script>
+    const hero = document.querySelector('.hero-panel');
+    const particleCount = 28;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('span');
+      particle.className = 'floating-particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.animationDelay = (Math.random() * 8) + 's';
+      particle.style.animationDuration = (8 + Math.random() * 10) + 's';
+      particle.style.transform = `scale(${0.6 + Math.random() * 1.4})`;
+      hero.appendChild(particle);
     }
 
-    setTimeout(tick, startDelay);
-  }
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
 
-  createTypewriter(
-    'rotator',
-    ['Data Analyst', 'Campaign Analyst', 'Business Analyst'],
-    { startDelay: 0 }
-  );
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      const isExpanded = mobileMenu.classList.contains('open');
+      menuToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      menuToggle.textContent = isExpanded ? '✕' : '☰';
+    });
 
-  createTypewriter(
-    'rotatorAlt',
-    ['Artificial Intelligence', 'Machine Learning'],
-    { startDelay: 450, pauseDuration: 1550 }
-  );
-
-  // Hero illustration rotator
-  (function() {
-    const slides = document.querySelectorAll('.rotator-stage .slide');
-    const dots = document.querySelectorAll('.rotator-dots .dot');
-    const caption = document.getElementById('rotatorCaption');
-    const stage = document.querySelector('.rotator-stage');
-    let current = 0;
-    let timer;
-    const INTERVAL = 5000;
-
-    function show(index) {
-      slides.forEach((s, i) => s.classList.toggle('active', i === index));
-      dots.forEach((d, i) => d.classList.toggle('active', i === index));
-      caption.style.opacity = 0;
-      setTimeout(() => {
-        caption.textContent = slides[index].dataset.caption;
-        caption.style.opacity = 1;
-      }, 200);
-      current = index;
-    }
-
-    function next() {
-      show((current + 1) % slides.length);
-    }
-
-    function start() {
-      stop();
-      timer = setInterval(next, INTERVAL);
-    }
-
-    function stop() {
-      if (timer) clearInterval(timer);
-    }
-
-    // Pause on hover
-    stage.parentElement.addEventListener('mouseenter', stop);
-    stage.parentElement.addEventListener('mouseleave', start);
-
-    // Click a dot to jump
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        show(i);
-        start();
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = '☰';
       });
     });
-
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      start();
-    }
-  })();
-  // Reveal sections while scrolling
-const sectionsToReveal = document.querySelectorAll(
-  'section:not(#hero)'
-);
-
-sectionsToReveal.forEach((section) => {
-  section.classList.add('reveal-section');
-});
-
-const sectionObserver = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-
-        // Animate each section only once
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  {
-    threshold: 0.12,
-    rootMargin: '0px 0px -60px 0px'
-  }
-);
-
-sectionsToReveal.forEach((section) => {
-  sectionObserver.observe(section);
-});
-
-  // Staggered skill dropping animation
-  (function () {
-    const skillsSection = document.getElementById('skills');
-    const skillItems = skillsSection
-      ? skillsSection.querySelectorAll('.skill-item')
-      : [];
-
-    if (!skillsSection || !skillItems.length) return;
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      skillItems.forEach((item) => item.classList.add('skill-visible'));
-      return;
-    }
-
-    skillsSection.classList.add('skills-animate');
-
-    skillItems.forEach((item, index) => {
-      item.style.setProperty('--skill-delay', `${(index % 6) * 85}ms`);
-    });
-
-    const skillsObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          skillItems.forEach((item) => {
-            item.classList.add('skill-visible');
-          });
-
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0.15,
-        rootMargin: '0px 0px -60px 0px'
-      }
-    );
-
-    skillsObserver.observe(skillsSection);
-  })();
-
-</script>
-
+  </script>
 </body>
 </html>
